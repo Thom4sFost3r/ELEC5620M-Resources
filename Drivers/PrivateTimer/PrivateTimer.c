@@ -22,13 +22,15 @@ volatile unsigned int *private_timer_interrupt	= (unsigned int *) 0xFFFEC60C;
 // For the load value register. Calculated using the Private Timers 225MHz frequency
 const unsigned int OneCsPeriod = 2250000;
 // For prescaler in control register
-const unsigned int Prescaler = 0;
+const unsigned int Prescaler = 0; // Timer lasts ~ 19s
 
 // VARIABLE INIT
 // old timer stores the previous centi-second time
 unsigned int oldtimervalue = 0;
 // new timer stores the current centi-second time
 unsigned int newtimervalue;
+// timed gap stores the difference between old and new timer values in seconds
+double timed_gap;
 
 /**
  * ConfigTimer
@@ -101,6 +103,39 @@ bool is1cs() {
     } else {
     	return false;
     }
+}
+
+/**
+ * PrintTimeGap
+ *
+ * Function is used to print the time difference between function calls
+ * Timer starts when called and print == 0
+ * Timer ends when called and print == 1
+ *
+ * Methods:
+ * 		if print is false
+ * 			Set the start point of the timer
+* 		if print is true
+* 			set the end point of the timer
+* 			calculate difference between start and end
+* 			print difference in centi-seconds
+ */
+void PrintTimeGap(bool print) {
+
+	int old;
+	int new;
+
+	if (print) {
+		newtimervalue = *private_timer_counter;
+		new = newtimervalue;
+		timed_gap = ((oldtimervalue - newtimervalue) / 2250000); // difference in centi-seconds
+		printf("%d\n",(oldtimervalue-newtimervalue));
+		printf("%lf\n",timed_gap);
+		printf("Timed Gap = %lf\n", timed_gap);
+	} else {
+		oldtimervalue = *private_timer_counter;
+		old = oldtimervalue;
+	}
 }
 
 /**

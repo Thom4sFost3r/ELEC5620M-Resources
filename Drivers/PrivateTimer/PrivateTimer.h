@@ -16,6 +16,7 @@
 void ConfigTimer(void);
 void ToggleTimer(bool en);
 bool is1cs(void);
+void PrintTimeGap(bool print);
 void ClearInterruptFlag(void);
 
 
