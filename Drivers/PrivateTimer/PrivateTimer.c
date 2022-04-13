@@ -31,6 +31,8 @@ unsigned int oldtimervalue = 0;
 unsigned int newtimervalue;
 // timed gap stores the difference between old and new timer values in seconds
 double timed_gap;
+// fps shows the number of frames per second assuming timed_gap is of one frame
+int fps;
 
 /**
  * ConfigTimer
@@ -128,10 +130,13 @@ void PrintTimeGap(bool print) {
 	if (print) {
 		newtimervalue = *private_timer_counter;
 		new = newtimervalue;
-		timed_gap = ((oldtimervalue - newtimervalue) / 2250000); // difference in centi-seconds
+		timed_gap = (double)(oldtimervalue - newtimervalue);
+		timed_gap = timed_gap / 22500000; // difference in seconds
+		fps = (int)(1/timed_gap);
 		printf("%d\n",(oldtimervalue-newtimervalue));
 		printf("%lf\n",timed_gap);
 		printf("Timed Gap = %lf\n", timed_gap);
+		printf("fps = %d\n", fps);
 	} else {
 		oldtimervalue = *private_timer_counter;
 		old = oldtimervalue;
