@@ -163,3 +163,12 @@ void ClearInterruptFlag() {
         *private_timer_interrupt = 0x1;
     }
 }
+
+/*
+ * RandomValue
+ *
+ * Returns the seemingly random value of the private timer value reg
+ */
+unsigned int RandomValue(void) {
+	return *private_timer_counter;
+}

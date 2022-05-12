@@ -18,6 +18,7 @@ void ToggleTimer(bool en);
 bool is1cs(void);
 void PrintTimeGap(bool print);
 void ClearInterruptFlag(void);
+unsigned int RandomValue(void);
 
 
 #endif /* PRIVATETIMER_PRIVATETIMER_H_ */
