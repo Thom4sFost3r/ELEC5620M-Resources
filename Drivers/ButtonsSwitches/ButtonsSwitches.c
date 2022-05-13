@@ -5,10 +5,12 @@
  *      Author: tom
  */
 
-#include "Buttons.h"
+#include "ButtonsSwitches.h"
 
 // KEY buttons base address
 volatile int *KEY_ptr = (int *)0xFF200050;
+// Slide switches base address
+volatile int *SWITCH_ptr = (int *)0xFF200040;
 
 
 /**
@@ -24,4 +26,8 @@ volatile int *KEY_ptr = (int *)0xFF200050;
  */
 char GetButton() {
 	return (*KEY_ptr & 0x0F);
+}
+
+int GetSwitch() {
+	return (*SWITCH_ptr & 0x3FF);
 }

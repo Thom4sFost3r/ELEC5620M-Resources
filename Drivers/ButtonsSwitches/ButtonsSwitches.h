@@ -5,10 +5,11 @@
  *      Author: tom
  */
 
-#ifndef BUTTONS_H_
-#define BUTTONS_H_
+#ifndef BUTTONSSWITCHES_H_
+#define BUTTONSSWITCHES_H_
 
 // FUNCTION INIT
 char GetButton(void);
+int GetSwitch();
 
 #endif /* BUTTONS_H_ */
